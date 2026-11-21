@@ -1,0 +1,120 @@
+/* style.css — Gullwing Harbour: a warm café-cream and harbour-teal theme. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  background: linear-gradient(180deg, #fdf6e9 0%, #ffe8c2 55%, #ffd9a0 100%);
+  color: #33302a;
+  min-height: 100vh;
+  padding: 10px 14px 26px;
+}
+
+#hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  align-items: center;
+  justify-content: space-between;
+  background: #40536b;
+  color: #fff8ea;
+  border-radius: 14px;
+  padding: 10px 18px;
+  box-shadow: 0 4px 14px rgba(64, 83, 107, 0.35);
+}
+
+#hud h1 { margin: 0; font-size: 24px; letter-spacing: 0.3px; }
+#round-subtitle { margin: 2px 0 0; font-style: italic; opacity: 0.85; font-size: 14px; }
+
+.hud-center { text-align: center; min-width: 240px; flex: 1; }
+#counter { font-size: 22px; font-weight: bold; }
+#timer-bar {
+  height: 10px; background: rgba(255,255,255,0.25); border-radius: 6px;
+  margin: 6px auto 2px; max-width: 340px; overflow: hidden;
+}
+#timer-fill { height: 100%; width: 100%; background: #7bd88f; border-radius: 6px; transition: width 0.25s linear; }
+#timer-fill.low { background: #ff6b5e; }
+#timer-text { font-size: 15px; font-variant-numeric: tabular-nums; }
+
+.hud-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+#score { font-weight: bold; font-size: 17px; margin-right: 4px; }
+button {
+  font: inherit; font-size: 15px; cursor: pointer;
+  border: 2px solid #7a4a2b; border-radius: 999px;
+  background: #ffd94d; color: #4a2f18; padding: 6px 14px;
+}
+button:hover:not(:disabled) { background: #ffe476; }
+button:disabled { opacity: 0.45; cursor: default; }
+#restart-btn { background: #fff8ea; }
+
+#round-title { text-align: center; margin: 14px 0 2px; font-size: 26px; color: #7a2d20; }
+.howto { text-align: center; margin: 0 0 12px; font-size: 15px; }
+
+#panels {
+  display: flex; gap: 18px; justify-content: center; align-items: flex-start; flex-wrap: wrap;
+}
+.panel-wrap { flex: 1 1 420px; max-width: 620px; }
+.panel-wrap h3 { text-align: center; margin: 0 0 6px; font-size: 17px; color: #40536b; }
+.panel {
+  position: relative; border: 4px solid #7a4a2b; border-radius: 12px;
+  overflow: hidden; background: #bfe3f2; cursor: crosshair;
+  box-shadow: 0 6px 18px rgba(90, 70, 50, 0.3);
+  aspect-ratio: 4 / 3;
+}
+.panel .scene, .panel svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.found-marker {
+  position: absolute; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border: 4px solid #e63946; border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.85), 0 0 14px rgba(230,57,70,0.7);
+  pointer-events: none; animation: marker-pop 0.35s ease-out;
+}
+@keyframes marker-pop {
+  0% { scale: 1.7; opacity: 0.2; } 100% { scale: 1; opacity: 1; }
+}
+
+.hint-pulse {
+  position: absolute; width: 44px; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border: 4px solid #ffb703; border-radius: 50%; pointer-events: none;
+  animation: hint-pulse 0.85s ease-out 3;
+}
+@keyframes hint-pulse {
+  0% { scale: 0.4; opacity: 1; } 100% { scale: 1.9; opacity: 0; }
+}
+
+.probe-cursor {
+  position: absolute; width: 22px; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border: 2px dashed rgba(64, 83, 107, 0.75); border-radius: 50%;
+  pointer-events: none;
+}
+
+#found-box {
+  max-width: 700px; margin: 16px auto 0; background: rgba(255, 253, 245, 0.85);
+  border: 2px dashed #b08954; border-radius: 12px; padding: 8px 18px 12px;
+}
+#found-box h3 { margin: 4px 0; font-size: 16px; color: #40536b; }
+#found-list { margin: 0; padding-left: 20px; columns: 2; font-size: 15px; }
+#found-list:empty::after { content: 'Nothing yet — happy hunting!'; font-style: italic; }
+
+#toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px);
+  background: #40536b; color: #fff8ea; padding: 10px 22px; border-radius: 999px;
+  font-size: 17px; opacity: 0; pointer-events: none; transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3); z-index: 30;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+#win-overlay {
+  position: fixed; inset: 0; background: rgba(38, 48, 64, 0.62);
+  display: none; align-items: center; justify-content: center; z-index: 40;
+}
+#win-overlay.show { display: flex; }
+.win-card {
+  background: #fffdf5; border: 4px solid #7a4a2b; border-radius: 18px;
+  padding: 28px 40px; text-align: center; max-width: 480px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.4); animation: marker-pop 0.3s ease-out;
+}
+.win-card h2 { margin: 0 0 8px; font-size: 30px; color: #7a2d20; }
+.win-card p { font-size: 17px; line-height: 1.45; }
+.win-card button { font-size: 18px; padding: 10px 24px; }

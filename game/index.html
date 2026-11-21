@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spot the Difference — Gullwing Harbour</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header id="hud">
+  <div class="hud-left">
+    <h1>🔍 Spot the Difference</h1>
+    <p id="round-subtitle">Round 1</p>
+  </div>
+  <div class="hud-center">
+    <div id="counter" aria-live="polite">0 of 10 found · 10 remain</div>
+    <div id="timer-bar"><div id="timer-fill"></div></div>
+    <div id="timer-text">4:00</div>
+  </div>
+  <div class="hud-right">
+    <div id="score">Score 0</div>
+    <button id="hint-btn" type="button">💡 Hint (3 left)</button>
+    <button id="restart-btn" type="button">↻ Restart scene</button>
+  </div>
+</header>
+
+<h2 id="round-title">Morning at Gullwing Harbour</h2>
+<p class="howto">Click or tap a difference in <strong>either</strong> picture. Arrow keys move the probe, Enter checks it, H asks for a hint. A miss costs 5 seconds!</p>
+
+<main id="panels">
+  <section class="panel-wrap">
+    <h3>Original</h3>
+    <div class="panel" id="panel-a">
+      <div class="scene"></div>
+      <div class="probe-cursor" id="cursor-a"></div>
+    </div>
+  </section>
+  <section class="panel-wrap">
+    <h3>Spot the changes</h3>
+    <div class="panel" id="panel-b">
+      <div class="scene"></div>
+      <div class="probe-cursor" id="cursor-b"></div>
+    </div>
+  </section>
+</main>
+
+<aside id="found-box">
+  <h3>Differences found</h3>
+  <ul id="found-list"></ul>
+</aside>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<div id="win-overlay">
+  <div class="win-card">
+    <h2 id="win-title">🎉 Round complete!</h2>
+    <p id="win-detail"></p>
+    <button id="next-btn" type="button">Next scene →</button>
+  </div>
+</div>
+
+<script type="module" src="./src/game.js"></script>
+</body>
+</html>
